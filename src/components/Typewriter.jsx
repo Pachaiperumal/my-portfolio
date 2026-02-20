@@ -20,15 +20,15 @@ const Typewriter = () => {
     }, []);
 
     return (
-        <span className="inline-block min-w-[300px] text-white font-semibold">
+        <span className="inline-flex text-violet-400 font-bold px-1">
             <AnimatePresence mode="wait">
                 <motion.span
                     key={index}
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="inline-block"
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="whitespace-nowrap inline-block"
                 >
                     {words[index]}
                 </motion.span>

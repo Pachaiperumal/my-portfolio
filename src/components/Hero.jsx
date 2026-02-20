@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Code, Terminal } from 'lucide-react'
 import Typewriter from './Typewriter'
 import ParticlesBackground from './ParticlesBackground'
 import { useMousePosition } from '../hooks/useMousePosition'
@@ -84,28 +84,26 @@ const Hero = () => {
             {/* Left Text Content */}
             <div className="flex-1 w-full text-center lg:text-left pt-10">
 
-              {/* Fade-In & Slide-Up Entrance Animation */}
-              <div className="overflow-hidden mb-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="inline-block relative pb-2"
-                >
-                  <span className="text-violet-400 font-medium tracking-[0.3em] uppercase text-sm relative z-10">
-                    Welcome to my portfolio
-                  </span>
-                  <div className="absolute inset-0 bg-violet-500/20 blur-md -z-10 rounded-full" />
-                </motion.div>
-              </div>
+              {/* Fade-In Entrance Animation */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="inline-block mb-6 relative"
+              >
+                <span className="audiowide-regular text-violet-400 font-medium tracking-[0.3em] uppercase text-sm relative z-10">
+                  Welcome to my portfolio
+                </span>
+                <div className="absolute inset-0 bg-violet-500/20 blur-md -z-10 rounded-full" />
+              </motion.div>
 
               {/* Slide-Up Text Animation & Gradient Animated Text */}
               <div className="overflow-hidden mb-6">
                 <motion.h1
                   initial={{ opacity: 0, y: 120 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tight leading-[1.1] text-white pb-2"
+                  transition={{ duration: 1, delay: 0.2, cubicBezier: [0.16, 1, 0.3, 1] }}
+                  className="roboto-slab-hero text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-white pb-2"
                 >
                   Hi, I'm <br className="hidden md:block" />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-500 animate-gradient">
@@ -114,17 +112,15 @@ const Hero = () => {
                 </motion.h1>
               </div>
 
-              {/* Slide-Up Typing Text Animation */}
-              <div className="overflow-hidden mb-10">
-                <motion.div
-                  initial={{ opacity: 0, y: 80 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light pb-2"
-                >
-                  I am a <Typewriter /> designing and building scalable web applications with modern technologies. Let's create something functional and beautiful.
-                </motion.div>
-              </div>
+              {/* Typing Text Animation */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                className="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
+              >
+                I am a <Typewriter /> designing and building scalable web applications with modern technologies. Let's create something functional and beautiful.
+              </motion.div>
 
               {/* CTA Button Hover Effects */}
               <motion.div
@@ -137,7 +133,7 @@ const Hero = () => {
                   href="#projects"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative group px-8 py-4 bg-violet-600 text-white font-bold rounded-full overflow-hidden flex items-center"
+                  className="relative group px-8 py-4 bg-violet-600 text-base md:text-lg text-white font-bold rounded-full overflow-hidden flex items-center"
                 >
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative z-10 flex items-center">
@@ -151,7 +147,7 @@ const Hero = () => {
                   href="#contact"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 glass text-white font-bold rounded-full transition-all border border-white/10 hover:border-white/30 hover:bg-white/10 relative overflow-hidden group"
+                  className="px-8 py-4 glass text-base md:text-lg text-white font-bold rounded-full transition-all border border-white/10 hover:border-white/30 hover:bg-white/10 relative overflow-hidden group"
                 >
                   <span className="relative z-10">Let's Talk</span>
                   <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -177,17 +173,51 @@ const Hero = () => {
               >
                 <div className="w-full h-full rounded-[2rem] overflow-hidden bg-slate-800 relative shadow-inner">
                   {/* Fallback geometric backdrop */}
-                  <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay z-10" />
+                  <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay z-10 pointer-events-none" />
 
                   {/* Glass Blur Background Tint */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 via-transparent to-indigo-500/20 z-10 mix-blend-overlay mix-blend-color-dodge" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 via-transparent to-indigo-500/20 z-10 mix-blend-overlay mix-blend-color-dodge pointer-events-none" />
 
-                  {/* Light Beams inner layout */}
-                  <div className="w-full h-full bg-gradient-to-br from-violet-900 to-slate-900 flex items-center justify-center relative">
-                    <div className="text-8xl text-white/5 font-black tracking-tighter mix-blend-overlay transform -rotate-12">PA</div>
-                    {/* Horizontal animated light beam */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_3s_infinite]" />
-                  </div>
+                  {/* Real Image Integration */}
+                  <img
+                    src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=1000&auto=format&fit=crop"
+                    alt="Pachai Perumal"
+                    className="absolute inset-0 w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-1000 origin-center filter grayscale hover:grayscale-0 z-0"
+                  />
+                  {/* Inner dark gradient for contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent opacity-80 z-0 pointer-events-none" />
+                  {/* Horizontal animated light beam over image */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_3s_infinite] z-20 pointer-events-none" />
+                </div>
+              </motion.div>
+
+              {/* Dynamic Floating Elements */}
+              <motion.div
+                animate={{ y: [0, -15, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                className="absolute -top-6 -right-6 lg:-right-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 border border-white/10 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
+              >
+                <div className="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center">
+                  <Code size={20} className="text-violet-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-white mb-0 leading-tight">Full Stack</p>
+                  <p className="text-xs text-slate-400 mb-0 leading-tight">Developer</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 15, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-8 -left-6 lg:-left-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 border border-white/10 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
+              >
+                <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center relative">
+                  <Terminal size={20} className="text-indigo-400 relative z-10" />
+                  <div className="absolute inset-0 rounded-full bg-indigo-500 animate-ping opacity-20" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-white mb-0 leading-tight">MERN Stack</p>
+                  <p className="text-xs text-slate-400 mb-0 leading-tight">React & Node</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -200,7 +230,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 0.6, y: 0 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
+          className="absolute bottom-10 left-[45%] lg:left-[45%] -translate-x-1/2 flex flex-col items-center gap-3 z-20"
         >
           <span className="text-[10px] uppercase tracking-[0.3em] text-violet-400 font-medium">Scroll to explore</span>
           <motion.div
