@@ -1,7 +1,5 @@
 const Education = () => {
-  return (
-    <div>Education</div>
-  )
+  return null // Education is integrated into About.jsx
 }
 
 export default Education
