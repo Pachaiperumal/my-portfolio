@@ -9,10 +9,10 @@ const Footer = () => {
             © {currentYear} Pachai Perumal A. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#home" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">Home</a>
-            <a href="#about" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">About</a>
-            <a href="#projects" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">Projects</a>
-            <a href="#contact" className="text-slate-500 hover:text-cyan-400 text-sm transition-colors">Contact</a>
+            <a href="#home" className="text-slate-500 hover:text-violet-400 text-sm transition-colors">Home</a>
+            <a href="#about" className="text-slate-500 hover:text-violet-400 text-sm transition-colors">About</a>
+            <a href="#projects" className="text-slate-500 hover:text-violet-400 text-sm transition-colors">Projects</a>
+            <a href="#contact" className="text-slate-500 hover:text-violet-400 text-sm transition-colors">Contact</a>
           </div>
         </div>
       </div>
