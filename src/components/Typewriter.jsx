@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive'
 
 const words = [
     "Full Stack Developer",
@@ -10,6 +11,7 @@ const words = [
 
 const Typewriter = () => {
     const [index, setIndex] = useState(0);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,7 +26,7 @@ const Typewriter = () => {
             <AnimatePresence mode="wait">
                 <motion.span
                     key={index}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={isMobile ? false : { opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}

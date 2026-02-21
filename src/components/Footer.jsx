@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
+import { useMediaQuery } from 'react-responsive'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -11,7 +13,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="relative bg-slate-950 pt-16 pb-8 overflow-hidden">
+    <footer className="relative bg-slate-100 dark:bg-slate-950 pt-16 pb-8 overflow-hidden transition-colors duration-500">
 
       {/* Ambient Noise Background */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
@@ -22,7 +24,7 @@ const Footer = () => {
 
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={isMobile ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -30,8 +32,8 @@ const Footer = () => {
         >
           {/* Copyright Info */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <p className="poppins-light text-slate-400 text-sm mb-2">
-              © {currentYear} <span className="text-white font-medium">Pachai Perumal A</span>. All rights reserved.
+            <p className="poppins-light text-slate-600 dark:text-slate-400 text-sm mb-2 transition-colors duration-500">
+              © {currentYear} <span className="text-slate-900 dark:text-white font-medium transition-colors duration-500">Pachai Perumal A</span>. All rights reserved.
             </p>
             <p className="text-xs text-slate-500 flex items-center gap-1.5">
               <span>Crafted with passion using</span>
@@ -47,7 +49,7 @@ const Footer = () => {
                 href={link.href}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="poppins-light text-slate-400 hover:text-white text-sm px-4 py-2 rounded-full border border-transparent hover:border-white/10 hover:bg-white/5 transition-all duration-300"
+                className="poppins-light text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm px-4 py-2 rounded-full border border-transparent hover:border-slate-300 dark:hover:border-white/10 hover:bg-slate-200 dark:hover:bg-white/5 transition-all duration-300"
               >
                 {link.name}
               </motion.a>

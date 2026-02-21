@@ -3,6 +3,7 @@ import { ArrowRight, Code, Terminal, Download } from 'lucide-react'
 import Typewriter from './Typewriter'
 import ParticlesBackground from './ParticlesBackground'
 import { useMousePosition } from '../hooks/useMousePosition'
+import { useMediaQuery } from 'react-responsive'
 
 const Hero = () => {
   const { scrollY } = useScroll()
@@ -14,6 +15,13 @@ const Hero = () => {
 
   const yOrbs1 = useTransform(scrollY, [0, 1000], [0, 300])
   const yOrbs2 = useTransform(scrollY, [0, 1000], [0, -150])
+
+  // Disable scroll animations on mobile to prevent elements from vanishing
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+  // Provide fallback static values for mobile
+  const yTextValue = isMobile ? 0 : yText
+  const opacityTextValue = isMobile ? 1 : opacityText
 
   return (
     <>
@@ -48,7 +56,7 @@ const Hero = () => {
         />
 
         {/* Background Layers */}
-        <div className="absolute inset-0 w-full h-full bg-slate-950 -z-20" />
+        <div className="absolute inset-0 w-full h-full bg-slate-50 dark:bg-slate-950 transition-colors duration-500 -z-20" />
         <ParticlesBackground />
 
         {/* Parallax Orbs and Light Beams */}
@@ -78,7 +86,7 @@ const Hero = () => {
         {/* Main Content with Reveal on Scroll (Parallax opacity & Y) */}
         <div className="container mx-auto px-6 relative z-20 w-full max-w-7xl">
           <motion.div
-            style={{ y: yText, opacity: opacityText }}
+            style={{ y: yTextValue, opacity: opacityTextValue }}
             className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-12"
           >
             {/* Left Text Content */}
@@ -86,7 +94,7 @@ const Hero = () => {
 
               {/* Fade-In Entrance Animation */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={isMobile ? false : { opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="inline-block mb-6 relative"
@@ -100,10 +108,10 @@ const Hero = () => {
               {/* Slide-Up Text Animation & Gradient Animated Text */}
               <div className="overflow-hidden mb-6">
                 <motion.h1
-                  initial={{ opacity: 0, y: 120 }}
+                  initial={isMobile ? false : { opacity: 0, y: 120 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.2, cubicBezier: [0.16, 1, 0.3, 1] }}
-                  className="roboto-slab-hero text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-white pb-2"
+                  className="roboto-slab-hero text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white pb-2 transition-colors duration-500"
                 >
                   Hi, I'm <br className="hidden md:block" />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-500 animate-gradient">
@@ -114,10 +122,10 @@ const Hero = () => {
 
               {/* Typing Text Animation */}
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={isMobile ? false : { opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                className="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+                className="text-xl md:text-2xl text-slate-700 dark:text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed transition-colors duration-500"
               >
                 <span className="poppins-light">I am a </span>
                 <Typewriter />
@@ -126,7 +134,7 @@ const Hero = () => {
 
               {/* CTA Button Hover Effects */}
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={isMobile ? false : { opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
                 className="flex flex-wrap items-center justify-center lg:justify-start gap-6"
@@ -151,20 +159,20 @@ const Hero = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 glass text-base md:text-lg text-white font-bold rounded-full transition-all border border-white/10 hover:border-white/30 hover:bg-white/10 relative overflow-hidden group flex items-center"
+                  className="px-8 py-4 glass text-base md:text-lg text-slate-900 dark:text-white font-bold rounded-full transition-all hover:border-slate-900/30 dark:hover:border-white/30 hover:bg-slate-900/10 dark:hover:bg-white/10 relative overflow-hidden group flex items-center"
                 >
                   <span className="relative z-10 flex items-center">
                     <Download className="mr-2 group-hover:-translate-y-1 transition-transform" size={20} />
                     Download Resume
                   </span>
-                  <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-slate-900/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.a>
               </motion.div>
             </div>
 
             {/* Right Visual Content / Minimal Profile 3D presentation */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
+              initial={isMobile ? false : { opacity: 0, scale: 0.9, rotateY: 15 }}
               animate={{ opacity: 1, scale: 1, rotateY: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
               className="flex-1 w-full max-w-sm lg:max-w-md relative perspective-1000"
@@ -187,7 +195,7 @@ const Hero = () => {
 
                   {/* Real Image Integration */}
                   <img
-                    src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=1000&auto=format&fit=crop"
+                    src="/assets/profile.png"
                     alt="Pachai Perumal"
                     className="absolute inset-0 w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-1000 origin-center filter grayscale hover:grayscale-0 z-0"
                   />
@@ -202,29 +210,29 @@ const Hero = () => {
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                className="absolute -top-6 -right-6 lg:-right-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 border border-white/10 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
+                className="absolute -top-6 -right-6 lg:-right-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
               >
-                <div className="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center">
-                  <Code size={20} className="text-violet-400" />
+                <div className="w-10 h-10 rounded-full bg-violet-100/50 dark:bg-violet-500/20 flex items-center justify-center">
+                  <Code size={20} className="text-violet-600 dark:text-violet-400" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-white mb-0 leading-tight">Full Stack</p>
-                  <p className="text-xs text-slate-400 mb-0 leading-tight">Developer</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mb-0 leading-tight">Full Stack</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mb-0 leading-tight">Developer</p>
                 </div>
               </motion.div>
 
               <motion.div
                 animate={{ y: [0, 15, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-8 -left-6 lg:-left-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 border border-white/10 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
+                className="absolute -bottom-8 -left-6 lg:-left-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
               >
-                <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center relative">
-                  <Terminal size={20} className="text-indigo-400 relative z-10" />
+                <div className="w-10 h-10 rounded-full bg-indigo-100/50 dark:bg-indigo-500/20 flex items-center justify-center relative">
+                  <Terminal size={20} className="text-indigo-600 dark:text-indigo-400 relative z-10" />
                   <div className="absolute inset-0 rounded-full bg-indigo-500 animate-ping opacity-20" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-white mb-0 leading-tight">MERN Stack</p>
-                  <p className="text-xs text-slate-400 mb-0 leading-tight">React & Node</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white mb-0 leading-tight">MERN Stack</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mb-0 leading-tight">React & Node</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -234,7 +242,7 @@ const Hero = () => {
 
         {/* Scroll Down Indicator Animation */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={isMobile ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 0.6, y: 0 }}
           transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-10 left-[45%] lg:left-[45%] -translate-x-1/2 flex flex-col items-center gap-3 z-20"

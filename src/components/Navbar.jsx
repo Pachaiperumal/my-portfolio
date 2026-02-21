@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 
-const Navbar = () => {
+const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('Home')
@@ -71,27 +71,30 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-slate-950/80 backdrop-blur-md shadow-lg border-b border-white/10 py-4'
+        ? 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-lg border-b border-slate-200 dark:border-white/10 py-4'
         : 'bg-transparent py-6'
-        } ${isMobileMenuOpen ? 'backdrop-blur-xl bg-slate-950/95' : ''}`}
+        } ${isMobileMenuOpen ? 'backdrop-blur-xl bg-white/95 dark:bg-slate-950/95' : ''}`}
     >
       <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center relative">
         {/* Logo */}
         <motion.a
           href="#home"
           onClick={(e) => handleSmoothScroll(e, '#home', 'Home')}
-          className="flex items-center group w-1/4"
+          className="flex items-center group w-auto md:w-1/4 z-40"
           whileHover={{ scale: 1.05 }}
         >
-          <span className="allura-regular text-4xl text-white group-hover:text-violet-400 transition-colors">Pachai Perumal A</span>
+          <span className="allura-regular text-4xl text-slate-900 dark:text-white group-hover:text-violet-500 dark:group-hover:text-violet-400 transition-colors leading-[1.1] md:leading-tight">
+            Pachai<br className="block md:hidden" />
+            <span className="hidden md:inline"> </span>Perumal&nbsp;A
+          </span>
         </motion.a>
 
         {/* Desktop Floating Island */}
         <div className="hidden md:flex flex-1 justify-center">
           <div
             className={`flex items-center gap-1 p-1.5 rounded-full border transition-all duration-500 ${isScrolled
-              ? 'bg-white/5 border-white/10 shadow-lg backdrop-blur-xl'
-              : 'bg-white/5 border-transparent'
+              ? 'bg-slate-100/50 dark:bg-white/5 border-slate-200 dark:border-white/10 shadow-lg backdrop-blur-xl'
+              : 'bg-slate-100/30 dark:bg-white/5 border-transparent'
               }`}
           >
             {navLinks.map((link) => (
@@ -114,7 +117,7 @@ const Navbar = () => {
                   <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-violet-400 transition-all duration-300 w-0 group-hover:w-1/2 rounded-full" />
                 )}
 
-                <span className={`relative z-10 transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-slate-950' : 'text-slate-300 group-hover:text-white'
+                <span className={`relative z-10 transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-white dark:text-slate-950' : 'text-slate-600 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white'
                   }`}>
                   {link.name}
                 </span>
@@ -124,15 +127,27 @@ const Navbar = () => {
         </div>
 
         {/* Contact/CTA */}
-        <div className="hidden md:flex items-center justify-end w-1/4">
+        <div className="hidden md:flex items-center justify-end w-1/4 gap-4">
+          <motion.button
+            onClick={toggleTheme}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className={`p-2.5 rounded-full flex items-center justify-center transition-colors ${isScrolled
+              ? 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10'
+              : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/10 glass'
+              }`}
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </motion.button>
+
           <motion.a
             href="#contact"
             onClick={(e) => handleSmoothScroll(e, '#contact', 'Contact')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-6 py-2.5 rounded-full text-sm font-bold montserrat-bold transition-all ${isScrolled
-              ? 'bg-violet-500 text-slate-950 hover:bg-violet-400 shadow-lg shadow-violet-500/20'
-              : 'bg-white text-slate-950 hover:bg-violet-400 shadow-lg shadow-white/10'
+              ? 'bg-violet-500 text-white dark:text-slate-950 hover:bg-violet-400 shadow-lg shadow-violet-500/20'
+              : 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-violet-400 shadow-lg shadow-slate-900/10 dark:shadow-white/10'
               }`}
           >
             Hire Me
@@ -140,10 +155,18 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center justify-end w-1/4">
+        <div className="md:hidden flex items-center justify-end w-1/4 gap-3">
+          <motion.button
+            onClick={toggleTheme}
+            whileTap={{ scale: 0.9 }}
+            className="w-10 h-10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+          >
+            {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+          </motion.button>
+
           <motion.button
             whileTap={{ scale: 0.9 }}
-            className="w-10 h-10 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+            className="w-10 h-10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -159,7 +182,7 @@ const Navbar = () => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-slate-900/95 backdrop-blur-xl border-b border-white/5 shadow-2xl absolute top-full left-0 w-full"
+            className="md:hidden overflow-hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 shadow-2xl absolute top-full left-0 w-full"
           >
             <div className="flex flex-col px-6 py-6 gap-6">
               {navLinks.map((link) => (
@@ -169,7 +192,7 @@ const Navbar = () => {
                   onClick={(e) => handleSmoothScroll(e, link.href, link.name)}
                   className="relative group text-lg font-medium"
                 >
-                  <span className={`transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-violet-400' : 'text-slate-300'
+                  <span className={`transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-violet-500 dark:text-violet-400' : 'text-slate-600 dark:text-slate-300'
                     }`}>
                     {link.name}
                   </span>
@@ -177,11 +200,11 @@ const Navbar = () => {
                     }`} />
                 </a>
               ))}
-              <hr className="border-white/10 my-2" />
+              <hr className="border-slate-200 dark:border-white/10 my-2" />
               <a
                 href="#contact"
                 onClick={(e) => handleSmoothScroll(e, '#contact', 'Contact')}
-                className="w-full py-4 bg-violet-500 text-slate-950 rounded-xl text-center font-bold montserrat-bold hover:bg-violet-400 transition-colors"
+                className="w-full py-4 bg-violet-500 text-white dark:text-slate-950 rounded-xl text-center font-bold montserrat-bold hover:bg-violet-400 transition-colors"
               >
                 Hire Me
               </a>

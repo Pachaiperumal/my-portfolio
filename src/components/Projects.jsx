@@ -3,11 +3,16 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiRedux, SiSocketdotio
 } from 'react-icons/si'
+import { useMediaQuery } from 'react-responsive'
 
 const Projects = () => {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+  const yBg1 = isMobile ? 0 : y
+  const yBg2 = isMobile ? 0 : y2
 
   const projects = [
     {
@@ -62,16 +67,16 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-[#0A0515]">
+    <section id="projects" className="py-24 relative overflow-hidden bg-slate-50 dark:bg-[#0A0515] transition-colors duration-500">
 
       {/* Background Ambient Effects */}
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <motion.div
-          style={{ y }}
+          style={{ y: yBg1 }}
           className="absolute top-[10%] -right-32 w-[40rem] h-[40rem] bg-indigo-600/20 rounded-full blur-[140px] mix-blend-screen"
         />
         <motion.div
-          style={{ y: y2 }}
+          style={{ y: yBg2 }}
           className="absolute bottom-[10%] -left-32 w-[35rem] h-[35rem] bg-fuchsia-600/20 rounded-full blur-[120px] mix-blend-screen"
         />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
@@ -80,14 +85,14 @@ const Projects = () => {
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={isMobile ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="text-center mb-24 relative flex flex-col items-center"
         >
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={isMobile ? false : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -95,26 +100,26 @@ const Projects = () => {
             <span className="audiowide-regular text-indigo-400 tracking-[0.3em] uppercase text-sm mb-4 block">My Work</span>
           </motion.div>
 
-          <h2 className="playfair-display-bold text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-white pb-2 relative inline-flex justify-center flex-col items-center overflow-visible">
+          <h2 className="playfair-display-bold text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-slate-900 dark:text-white pb-2 relative inline-flex justify-center flex-col items-center overflow-visible transition-colors duration-500">
             Featured Projects
 
             {/* Glow Expand Animation */}
             <motion.div
-              initial={{ width: 0, opacity: 0 }}
+              initial={isMobile ? false : { width: 0, opacity: 0 }}
               whileInView={{ width: "10rem", opacity: 0.7 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: 0.4, ease: "circOut" }}
               className="absolute -bottom-2 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full shadow-[0_0_15px_rgba(99,102,241,0.8)]"
             />
             <motion.div
-              initial={{ width: 0, opacity: 0 }}
+              initial={isMobile ? false : { width: 0, opacity: 0 }}
               whileInView={{ width: "5rem", opacity: 0.4 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, delay: 0.6, ease: "circOut" }}
               className="absolute -bottom-4 h-[2px] bg-gradient-to-r from-transparent via-violet-500 to-transparent rounded-full"
             />
           </h2>
-          <p className="poppins-light mt-8 text-lg text-slate-400 max-w-[520px] mx-auto leading-[1.7]">
+          <p className="poppins-light mt-8 text-lg text-slate-600 dark:text-slate-400 max-w-[520px] mx-auto leading-[1.7] transition-colors duration-500">
             A showcase of my technical expertise, focusing on building scalable architecture, real-time systems, and beautiful user interfaces.
           </p>
         </motion.div>
@@ -122,7 +127,7 @@ const Projects = () => {
         {/* Projects Grid */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={isMobile ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           className="grid lg:grid-cols-2 gap-10 md:gap-14"
@@ -138,7 +143,7 @@ const Projects = () => {
               {/* Animated Moving Gradient Border */}
               <div className="absolute inset-[-100%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#8b5cf6_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className={`relative h-full glass p-8 md:p-10 rounded-[23px] border border-white/5 transition-all duration-500 overflow-hidden ${project.borderGlow}`}>
+              <div className={`relative h-full glass p-8 md:p-10 rounded-[23px] border border-slate-200 dark:border-white/5 transition-all duration-500 overflow-hidden ${project.borderGlow}`}>
                 {/* Card Hover Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
 
@@ -152,11 +157,11 @@ const Projects = () => {
                     <Terminal className="text-slate-600 opacity-20" size={80} />
                   </div>
 
-                  <h3 className="montserrat-bold text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-indigo-400 transition-colors duration-300">
+                  <h3 className="montserrat-bold text-2xl md:text-3xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
                     {project.title}
                   </h3>
 
-                  <p className="poppins-light text-slate-300 mb-8 leading-[1.7] text-lg max-w-[500px] flex-grow">
+                  <p className="poppins-light text-slate-700 dark:text-slate-300 mb-8 leading-[1.7] text-lg max-w-[500px] flex-grow transition-colors duration-500">
                     {project.description}
                   </p>
 
@@ -165,7 +170,7 @@ const Projects = () => {
                     {project.tech.map((t) => (
                       <span
                         key={t.name}
-                        className="flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-md rounded-xl text-xs font-semibold border border-white/5 text-slate-300 shadow-md transition-colors"
+                        className="flex items-center gap-2 px-3 py-1.5 bg-slate-100/80 dark:bg-slate-900/80 backdrop-blur-md rounded-xl text-xs font-semibold border border-slate-200 dark:border-white/5 text-slate-700 dark:text-slate-300 shadow-md transition-colors"
                       >
                         {t.icon}
                         {t.name}
@@ -177,14 +182,14 @@ const Projects = () => {
                   <div className="flex items-center gap-6 mt-auto">
                     <a
                       href={project.github}
-                      className="flex items-center text-sm font-bold text-slate-300 hover:text-white transition-colors group/link"
+                      className="flex items-center text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors group/link"
                     >
                       <Github className="mr-2 group-hover/link:-translate-y-1 transition-transform" size={18} />
                       Source
                     </a>
                     <a
                       href={project.link}
-                      className="flex items-center text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-colors group/link"
+                      className="flex items-center text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors group/link"
                     >
                       <ExternalLink className="mr-2 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" size={18} />
                       Live Demo

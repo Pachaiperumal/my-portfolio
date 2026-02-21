@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useMediaQuery } from 'react-responsive'
 import {
     motion,
     useMotionValue,
@@ -13,6 +14,7 @@ export default function LoadingScreen({
 }) {
     const [isVisible, setIsVisible] = useState(true);
     const [progress, setProgress] = useState(0);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
     // --- CONFIGURATION ---
     const MIN_DEG = -135;
@@ -70,7 +72,7 @@ export default function LoadingScreen({
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
+            initial={isMobile ? false : { opacity: 0 }}
             animate={{ opacity: isVisible ? 1 : 0 }}
             className={`fixed inset-0 w-full h-full bg-neutral-950 flex flex-col items-center justify-center overflow-hidden z-50 transition-opacity duration-500 ${!isVisible ? 'pointer-events-none' : ''}`}
         >
@@ -157,7 +159,7 @@ export default function LoadingScreen({
             {/* Loading text */}
             <motion.div
                 className="absolute bottom-8 sm:bottom-12 text-center px-4"
-                initial={{ opacity: 0, y: 20 }}
+                initial={isMobile ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
             />

@@ -35,12 +35,16 @@
     }
 
     body {
-        @apply bg-slate-950 text-slate-50 font-sans selection:bg-violet-500/30;
+        @apply bg-slate-50 text-slate-900 font-sans selection:bg-violet-500/30 transition-colors duration-500;
+    }
+
+    .dark body {
+        @apply bg-slate-950 text-slate-50;
     }
 }
 
 .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    @apply bg-slate-900/5 dark:bg-white/5 backdrop-blur-lg border border-slate-900/10 dark:border-white/10;
 }
 
 .text-gradient {
