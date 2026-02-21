@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Code, Terminal } from 'lucide-react'
+import { ArrowRight, Code, Terminal, Download } from 'lucide-react'
 import Typewriter from './Typewriter'
 import ParticlesBackground from './ParticlesBackground'
 import { useMousePosition } from '../hooks/useMousePosition'
@@ -146,12 +146,17 @@ const Hero = () => {
                   <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500 z-0" />
                 </motion.a>
                 <motion.a
-                  href="#contact"
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 glass text-base md:text-lg text-white font-bold rounded-full transition-all border border-white/10 hover:border-white/30 hover:bg-white/10 relative overflow-hidden group"
+                  className="px-8 py-4 glass text-base md:text-lg text-white font-bold rounded-full transition-all border border-white/10 hover:border-white/30 hover:bg-white/10 relative overflow-hidden group flex items-center"
                 >
-                  <span className="relative z-10">Let's Talk</span>
+                  <span className="relative z-10 flex items-center">
+                    <Download className="mr-2 group-hover:-translate-y-1 transition-transform" size={20} />
+                    Download Resume
+                  </span>
                   <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.a>
               </motion.div>

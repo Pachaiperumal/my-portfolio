@@ -9,6 +9,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
 import CursorGlow from './components/CursorGlow'
+import StarBackground from './components/StarBackground'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -17,6 +18,8 @@ function App() {
     <div className="min-h-screen bg-slate-950 text-slate-50 selection:bg-violet-500/30">
       {/* Site-wide Ambient Cursor Effect */}
       <CursorGlow />
+      {/* Site-wide Background Stars */}
+      <StarBackground />
 
       <AnimatePresence mode='wait'>
         {isLoading ? (

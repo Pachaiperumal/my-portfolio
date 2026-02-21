@@ -18,11 +18,11 @@ const CursorGlow = () => {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none mix-blend-screen z-50 overflow-hidden"
+            className="fixed top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen z-50 overflow-hidden"
             animate={{
-                x: mousePosition.x - 192, // center horizontal
-                y: mousePosition.y - 192, // center vertical
-                opacity: 0.15,
+                x: mousePosition.x - 200, // center horizontal
+                y: mousePosition.y - 200, // center vertical
+                opacity: 0.5,
             }}
             transition={{
                 type: "spring",
@@ -31,8 +31,8 @@ const CursorGlow = () => {
                 mass: 0.1
             }}
             style={{
-                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(217, 70, 239, 0.1) 40%, rgba(0,0,0,0) 70%)',
-                filter: 'blur(40px)',
+                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(217, 70, 239, 0.3) 40%, rgba(0,0,0,0) 70%)',
+                filter: 'blur(50px)',
             }}
         />
     );
