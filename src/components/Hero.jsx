@@ -154,7 +154,7 @@ const Hero = () => {
                   <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500 z-0" />
                 </motion.a>
                 <motion.a
-                  href="/resume.pdf"
+                  href="/assets/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
