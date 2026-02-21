@@ -62,7 +62,7 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-slate-950">
+    <section id="projects" className="py-24 relative overflow-hidden bg-[#0A0515]">
 
       {/* Background Ambient Effects */}
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">

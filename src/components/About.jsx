@@ -6,7 +6,7 @@ const About = () => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-slate-950">
+    <section id="about" className="py-24 relative overflow-hidden bg-[#0B1120]">
 
       {/* Background Ambient Effects */}
       <div className="absolute inset-0 z-0 opacity-40">
@@ -14,7 +14,7 @@ const About = () => {
           style={{ y }}
           className="absolute top-[10%] -left-32 w-[35rem] h-[35rem] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen"
         />
-        <div className="absolute bottom-[10%] -right-32 w-[40rem] h-[40rem] bg-violet-600/20 rounded-full blur-[140px] mix-blend-screen" />
+        <div className="absolute bottom-[10%] -right-32 w-[40rem] h-[40rem] bg-blue-600/20 rounded-full blur-[140px] mix-blend-screen" />
         <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
       </div>
 

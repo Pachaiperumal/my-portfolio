@@ -85,7 +85,7 @@ const Skills = () => {
   }
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-slate-950">
+    <section id="skills" className="py-24 relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950">
 
       {/* Background Ambient Effects */}
       <div className="absolute inset-0 z-0 opacity-40">
