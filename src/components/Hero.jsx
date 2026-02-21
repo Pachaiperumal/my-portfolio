@@ -117,9 +117,11 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                className="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
+                className="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               >
-                I am a <Typewriter /> designing and building scalable web applications with modern technologies. Let's create something functional and beautiful.
+                <span className="poppins-light">I am a </span>
+                <Typewriter />
+                <span className="roboto-slab-regular"> designing and building scalable web applications with modern technologies. Let's create something functional and beautiful.</span>
               </motion.div>
 
               {/* CTA Button Hover Effects */}

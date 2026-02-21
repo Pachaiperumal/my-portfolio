@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone, Send, Github, Linkedin, Twitter } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Contact = () => {
@@ -55,6 +55,7 @@ const Contact = () => {
               <p className="font-bold mb-4">Follow Me</p>
               <div className="flex space-x-4">
                 {[Github, Linkedin, Twitter].map((Icon, i) => (
+                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
                   <a key={i} href="#" className="w-12 h-12 glass rounded-2xl flex items-center justify-center hover:text-violet-400 hover:border-violet-500/50 transition-all">
                     <Icon size={20} />
                   </a>

@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Layers, MessageSquare, School } from 'lucide-react'
+import { ExternalLink, Github, MessageSquare, School } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const Projects = () => {

@@ -20,7 +20,7 @@ const Typewriter = () => {
     }, []);
 
     return (
-        <span className="inline-flex text-violet-400 font-bold px-1">
+        <span className="inline-flex text-violet-400 noto-serif-bold px-1">
             <AnimatePresence mode="wait">
                 <motion.span
                     key={index}

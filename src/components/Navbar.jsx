@@ -114,7 +114,7 @@ const Navbar = () => {
                   <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-violet-400 transition-all duration-300 w-0 group-hover:w-1/2 rounded-full" />
                 )}
 
-                <span className={`relative z-10 transition-colors duration-300 ${activeTab === link.name ? 'text-slate-950' : 'text-slate-300 group-hover:text-white'
+                <span className={`relative z-10 transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-slate-950' : 'text-slate-300 group-hover:text-white'
                   }`}>
                   {link.name}
                 </span>
@@ -130,7 +130,7 @@ const Navbar = () => {
             onClick={(e) => handleSmoothScroll(e, '#contact', 'Contact')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${isScrolled
+            className={`px-6 py-2.5 rounded-full text-sm font-bold montserrat-bold transition-all ${isScrolled
               ? 'bg-violet-500 text-slate-950 hover:bg-violet-400 shadow-lg shadow-violet-500/20'
               : 'bg-white text-slate-950 hover:bg-violet-400 shadow-lg shadow-white/10'
               }`}
@@ -169,7 +169,7 @@ const Navbar = () => {
                   onClick={(e) => handleSmoothScroll(e, link.href, link.name)}
                   className="relative group text-lg font-medium"
                 >
-                  <span className={`transition-colors duration-300 ${activeTab === link.name ? 'text-violet-400' : 'text-slate-300'
+                  <span className={`transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-violet-400' : 'text-slate-300'
                     }`}>
                     {link.name}
                   </span>
@@ -181,7 +181,7 @@ const Navbar = () => {
               <a
                 href="#contact"
                 onClick={(e) => handleSmoothScroll(e, '#contact', 'Contact')}
-                className="w-full py-4 bg-violet-500 text-slate-950 rounded-xl text-center font-bold hover:bg-violet-400 transition-colors"
+                className="w-full py-4 bg-violet-500 text-slate-950 rounded-xl text-center font-bold montserrat-bold hover:bg-violet-400 transition-colors"
               >
                 Hire Me
               </a>
