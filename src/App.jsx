@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, Suspense, lazy } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import LoadingScreen from './components/LoadingScreen'
 import CursorGlow from './components/CursorGlow'
 import StarBackground from './components/StarBackground'
+
+// Lazy load components that are not immediately visible
+const About = lazy(() => import('./components/About'))
+const Skills = lazy(() => import('./components/Skills'))
+const Projects = lazy(() => import('./components/Projects'))
+const Contact = lazy(() => import('./components/Contact'))
+const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 selection:bg-violet-500/30">
-      {/* Site-wide Ambient Cursor Effect */}
       <CursorGlow />
-      {/* Site-wide Background Stars */}
       <StarBackground />
 
       <AnimatePresence mode='wait'>
@@ -33,13 +33,20 @@ function App() {
           >
             <Navbar />
             <main>
+              {/* Hero is above the fold, so we keep it imported normally */}
               <Hero />
-              <About />
-              <Skills />
-              <Projects />
-              <Contact />
+
+              {/* Suspense wrapper for lazy loaded components */}
+              <Suspense fallback={<div className="min-h-screen" />}>
+                <About />
+                <Skills />
+                <Projects />
+                <Contact />
+              </Suspense>
             </main>
-            <Footer />
+            <Suspense fallback={<div />}>
+              <Footer />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>

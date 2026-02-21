@@ -1,7 +1,7 @@
 import { ExternalLink, Github, MessageSquare, School, Terminal } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import {
-  SiReact, SiNodedotjs, SiExpress, SiMongodb, SiTailwindcss, SiRedux, SiSocketdotio, SiJsonwebtokens
+  SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiRedux, SiSocketdotio
 } from 'react-icons/si'
 
 const Projects = () => {

@@ -2,8 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { MonitorSmartphone, Server, Database, Code2 } from 'lucide-react'
 import {
   SiHtml5, SiCss3, SiJavascript, SiReact, SiTailwindcss, SiBootstrap, SiFramer,
-  SiNodedotjs, SiExpress, SiJsonwebtokens,
-  SiMongodb, SiPostgresql, SiSqlite
+  SiNodedotjs, SiMongodb, SiPostgresql, SiSqlite, SiExpress, SiJsonwebtokens
 } from 'react-icons/si'
 
 const Skills = () => {
