@@ -133,58 +133,63 @@ const Projects = () => {
               variants={cardVariants}
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className={`glass p-8 md:p-10 rounded-3xl border border-white/5 transition-all duration-500 group relative overflow-hidden shadow-xl ${project.borderGlow}`}
+              className="relative rounded-3xl group p-[1px] overflow-hidden shadow-xl"
             >
-              {/* Card Hover Gradient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+              {/* Animated Moving Gradient Border */}
+              <div className="absolute inset-[-100%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#8b5cf6_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Icon Header */}
-                <div className="flex items-start justify-between mb-8">
-                  <div className={`inline-block p-4 rounded-2xl ${project.iconBg} transform transition-transform duration-500 group-hover:-rotate-3`}>
-                    {project.icon}
+              <div className={`relative h-full glass p-8 md:p-10 rounded-[23px] border border-white/5 transition-all duration-500 overflow-hidden ${project.borderGlow}`}>
+                {/* Card Hover Gradient Background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Icon Header */}
+                  <div className="flex items-start justify-between mb-8">
+                    <div className={`inline-block p-4 rounded-2xl ${project.iconBg} transform transition-transform duration-500 group-hover:-rotate-3`}>
+                      {project.icon}
+                    </div>
+                    {/* Decorative Terminal Icon Top Right */}
+                    <Terminal className="text-slate-600 opacity-20" size={80} />
                   </div>
-                  {/* Decorative Terminal Icon Top Right */}
-                  <Terminal className="text-slate-600 opacity-20" size={80} />
-                </div>
 
-                <h3 className="montserrat-bold text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-indigo-400 transition-colors duration-300">
-                  {project.title}
-                </h3>
+                  <h3 className="montserrat-bold text-2xl md:text-3xl font-bold mb-4 text-white group-hover:text-indigo-400 transition-colors duration-300">
+                    {project.title}
+                  </h3>
 
-                <p className="poppins-light text-slate-300 mb-8 leading-[1.7] text-lg max-w-[500px] flex-grow">
-                  {project.description}
-                </p>
+                  <p className="poppins-light text-slate-300 mb-8 leading-[1.7] text-lg max-w-[500px] flex-grow">
+                    {project.description}
+                  </p>
 
-                {/* Tech Stack Pills */}
-                <div className="flex flex-wrap gap-3 mb-10">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t.name}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-md rounded-xl text-xs font-semibold border border-white/5 text-slate-300 shadow-md transition-colors"
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-3 mb-10">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t.name}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-md rounded-xl text-xs font-semibold border border-white/5 text-slate-300 shadow-md transition-colors"
+                      >
+                        {t.icon}
+                        {t.name}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action Links */}
+                  <div className="flex items-center gap-6 mt-auto">
+                    <a
+                      href={project.github}
+                      className="flex items-center text-sm font-bold text-slate-300 hover:text-white transition-colors group/link"
                     >
-                      {t.icon}
-                      {t.name}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Links */}
-                <div className="flex items-center gap-6 mt-auto">
-                  <a
-                    href={project.github}
-                    className="flex items-center text-sm font-bold text-slate-300 hover:text-white transition-colors group/link"
-                  >
-                    <Github className="mr-2 group-hover/link:-translate-y-1 transition-transform" size={18} />
-                    Source
-                  </a>
-                  <a
-                    href={project.link}
-                    className="flex items-center text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-colors group/link"
-                  >
-                    <ExternalLink className="mr-2 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" size={18} />
-                    Live Demo
-                  </a>
+                      <Github className="mr-2 group-hover/link:-translate-y-1 transition-transform" size={18} />
+                      Source
+                    </a>
+                    <a
+                      href={project.link}
+                      className="flex items-center text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-colors group/link"
+                    >
+                      <ExternalLink className="mr-2 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" size={18} />
+                      Live Demo
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>

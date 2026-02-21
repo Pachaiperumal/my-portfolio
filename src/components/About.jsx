@@ -120,46 +120,51 @@ const About = () => {
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="glass p-8 md:p-10 rounded-3xl relative overflow-hidden group border border-transparent hover:border-violet-500/20 shadow-lg"
+              className="relative rounded-3xl group p-[1px] overflow-hidden shadow-lg"
             >
-              {/* Animated Hover Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              {/* Animated Moving Gradient Border */}
+              <div className="absolute inset-[-100%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#00000000_50%,#8b5cf6_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <h3 className="montserrat-bold text-2xl flex items-center mb-8 relative z-10 text-white">
-                <div className="w-12 h-12 rounded-full bg-violet-500/20 flex items-center justify-center mr-4">
-                  <GraduationCap className="text-violet-400 transition-transform duration-500 group-hover:scale-110" size={24} />
-                </div>
-                Educational Journey
-              </h3>
+              <div className="relative h-full glass p-8 md:p-10 rounded-[23px] border border-white/5 transition-all duration-500 overflow-hidden">
+                {/* Animated Hover Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-              <div className="relative pl-8 md:pl-10 pb-4">
-                {/* Timeline Line (Animated Grow) */}
-                <motion.div
-                  initial={{ height: 0 }}
-                  whileInView={{ height: "100%" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, delay: 0.6, ease: "easeInOut" }}
-                  className="absolute left-[15px] md:left-[23px] top-6 w-[2px] bg-gradient-to-b from-violet-500 to-transparent origin-top"
-                />
+                <h3 className="montserrat-bold text-2xl flex items-center mb-8 relative z-10 text-white">
+                  <div className="w-12 h-12 rounded-full bg-violet-500/20 flex items-center justify-center mr-4">
+                    <GraduationCap className="text-violet-400 transition-transform duration-500 group-hover:scale-110" size={24} />
+                  </div>
+                  Educational Journey
+                </h3>
 
-                {/* Timeline Item */}
-                <div className="relative z-10">
-                  <div className="absolute -left-[37px] md:-left-[45px] top-1.5 w-5 h-5 rounded-full bg-slate-900 border-[3px] border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.6)]" />
+                <div className="relative pl-8 md:pl-10 pb-4">
+                  {/* Timeline Line (Animated Grow) */}
+                  <motion.div
+                    initial={{ height: 0 }}
+                    whileInView={{ height: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.6, ease: "easeInOut" }}
+                    className="absolute left-[15px] md:left-[23px] top-6 w-[2px] bg-gradient-to-b from-violet-500 to-transparent origin-top"
+                  />
 
-                  <div className="glass bg-slate-900/40 p-6 rounded-2xl border border-white/5 hover:border-white/10 transition-colors transform transition-transform group-hover:translate-x-2 duration-300">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-                      <h4 className="roboto-slab-regular text-xl font-bold text-white">Bachelor of Computer Applications</h4>
-                      <div className="px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 text-xs font-bold border border-violet-500/30 whitespace-nowrap w-fit">
-                        2022 – 2025
+                  {/* Timeline Item */}
+                  <div className="relative z-10">
+                    <div className="absolute -left-[37px] md:-left-[45px] top-1.5 w-5 h-5 rounded-full bg-slate-900 border-[3px] border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.6)]" />
+
+                    <div className="glass bg-slate-900/40 p-6 rounded-2xl border border-white/5 hover:border-white/10 transition-colors transform transition-transform group-hover:translate-x-2 duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                        <h4 className="roboto-slab-regular text-xl font-bold text-white">Bachelor of Computer Applications</h4>
+                        <div className="px-3 py-1 rounded-full bg-violet-500/20 text-violet-300 text-xs font-bold border border-violet-500/30 whitespace-nowrap w-fit">
+                          2022 – 2025
+                        </div>
                       </div>
-                    </div>
 
-                    <p className="text-violet-400 font-medium mb-4 text-base">Jawahar Science College</p>
+                      <p className="text-violet-400 font-medium mb-4 text-base">Jawahar Science College</p>
 
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 bg-black/20 p-3 rounded-xl w-fit">
-                      <span className="flex items-center"><BookOpen size={14} className="mr-2 text-slate-500" /> Major in CS</span>
-                      <div className="w-1 h-1 rounded-full bg-slate-600" />
-                      <span className="flex items-center"><MapPin size={14} className="mr-2 text-slate-500" /> Neyveli</span>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400 bg-black/20 p-3 rounded-xl w-fit">
+                        <span className="flex items-center"><BookOpen size={14} className="mr-2 text-slate-500" /> Major in CS</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-600" />
+                        <span className="flex items-center"><MapPin size={14} className="mr-2 text-slate-500" /> Neyveli</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -182,7 +187,7 @@ const About = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </section >
   )
 }
 
