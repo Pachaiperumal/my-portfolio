@@ -92,17 +92,19 @@ const Skills = () => {
     <section id="skills" className="py-24 relative overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 via-slate-50 to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 transition-colors duration-500">
 
       {/* Background Ambient Effects */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <motion.div
-          style={{ y: yBg1 }}
-          className="absolute top-[20%] right-[-10%] w-[40rem] h-[40rem] bg-violet-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"
-        />
-        <motion.div
-          style={{ y: yBg2 }}
-          className="absolute bottom-[-10%] left-[-10%] w-[35rem] h-[35rem] bg-fuchsia-600/10 rounded-full blur-[140px] mix-blend-screen pointer-events-none"
-        />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
-      </div>
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 opacity-40">
+          <motion.div
+            style={{ y: yBg1 }}
+            className="absolute top-[20%] right-[-10%] w-[40rem] h-[40rem] bg-violet-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"
+          />
+          <motion.div
+            style={{ y: yBg2 }}
+            className="absolute bottom-[-10%] left-[-10%] w-[35rem] h-[35rem] bg-fuchsia-600/10 rounded-full blur-[140px] mix-blend-screen pointer-events-none"
+          />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
+        </div>
+      )}
 
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         <motion.div

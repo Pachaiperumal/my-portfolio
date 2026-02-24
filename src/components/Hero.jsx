@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Code, Terminal, Download } from 'lucide-react'
 import Typewriter from './Typewriter'
 import ParticlesBackground from './ParticlesBackground'
+import SplitText from './SplitText'
 import { useMousePosition } from '../hooks/useMousePosition'
 import { useMediaQuery } from 'react-responsive'
 
@@ -60,28 +61,34 @@ const Hero = () => {
         <ParticlesBackground />
 
         {/* Parallax Orbs and Light Beams */}
-        <motion.div
-          style={{ y: yOrbs1 }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-            rotate: [0, 90, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-r from-violet-600/30 to-fuchsia-600/30 rounded-full blur-[120px] -z-10 mix-blend-screen"
-        />
-        <motion.div
-          style={{ y: yOrbs2 }}
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.2, 0.4, 0.2],
-            rotate: [0, -90, 0]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-1/4 -right-20 w-[40rem] h-[40rem] bg-gradient-to-l from-indigo-500/20 to-blue-500/20 rounded-full blur-[150px] -z-10 mix-blend-screen"
-        />
+        {!isMobile && (
+          <>
+            <motion.div
+              style={{ y: yOrbs1 }}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+                rotate: [0, 90, 0]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-r from-violet-600/30 to-fuchsia-600/30 rounded-full blur-[120px] -z-10 mix-blend-screen"
+            />
+            <motion.div
+              style={{ y: yOrbs2 }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.2, 0.4, 0.2],
+                rotate: [0, -90, 0]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute bottom-1/4 -right-20 w-[40rem] h-[40rem] bg-gradient-to-l from-indigo-500/20 to-blue-500/20 rounded-full blur-[150px] -z-10 mix-blend-screen"
+            />
+          </>
+        )}
 
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none -z-10" />
+        {!isMobile && (
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none -z-10" />
+        )}
 
         {/* Main Content with Reveal on Scroll (Parallax opacity & Y) */}
         <div className="container mx-auto px-6 relative z-20 w-full max-w-7xl">
@@ -114,9 +121,22 @@ const Hero = () => {
                   className="roboto-slab-hero text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-slate-900 dark:text-white pb-2 transition-colors duration-500"
                 >
                   Hi, I'm <br className="hidden md:block" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-500 animate-gradient">
-                    Pachai Perumal A
-                  </span>
+                  <SplitText
+                    text="Pachai Perumal A"
+                    delay={50}
+                    duration={1.25}
+                    ease="power3.out"
+                    from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    gradientFrom="#a78bfa"
+                    gradientVia="#c084fc"
+                    gradientTo="#6366f1"
+                    useScrollTrigger={false}
+                    loadDelay={0.5}
+                    textAlign="left"
+                    tag="span"
+                    onLetterAnimationComplete={() => console.log('Name animation complete!')}
+                  />
                 </motion.h1>
               </div>
 
@@ -188,10 +208,14 @@ const Hero = () => {
               >
                 <div className="w-full h-full rounded-[2rem] overflow-hidden bg-slate-800 relative shadow-inner">
                   {/* Fallback geometric backdrop */}
-                  <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay z-10 pointer-events-none" />
+                  {!isMobile && (
+                    <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay z-10 pointer-events-none" />
+                  )}
 
                   {/* Glass Blur Background Tint */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 via-transparent to-indigo-500/20 z-10 mix-blend-overlay mix-blend-color-dodge pointer-events-none" />
+                  {!isMobile && (
+                    <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 via-transparent to-indigo-500/20 z-10 mix-blend-overlay mix-blend-color-dodge pointer-events-none" />
+                  )}
 
                   {/* Real Image Integration */}
                   <img
@@ -208,8 +232,8 @@ const Hero = () => {
 
               {/* Dynamic Floating Elements */}
               <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                animate={isMobile ? { y: 0 } : { y: [0, -15, 0] }}
+                transition={isMobile ? {} : { repeat: Infinity, duration: 6, ease: "easeInOut" }}
                 className="absolute -top-6 -right-6 lg:-right-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
               >
                 <div className="w-10 h-10 rounded-full bg-violet-100/50 dark:bg-violet-500/20 flex items-center justify-center">
@@ -222,8 +246,8 @@ const Hero = () => {
               </motion.div>
 
               <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
+                animate={isMobile ? { y: 0 } : { y: [0, 15, 0] }}
+                transition={isMobile ? {} : { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
                 className="absolute -bottom-8 -left-6 lg:-left-12 glass px-6 py-4 rounded-3xl flex items-center gap-3 shadow-2xl backdrop-blur-md z-30 pointer-events-none"
               >
                 <div className="w-10 h-10 rounded-full bg-indigo-100/50 dark:bg-indigo-500/20 flex items-center justify-center relative">
@@ -249,8 +273,8 @@ const Hero = () => {
         >
           <span className="text-[10px] uppercase tracking-[0.3em] text-violet-400 font-medium">Scroll to explore</span>
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            animate={isMobile ? { y: 0 } : { y: [0, 10, 0] }}
+            transition={isMobile ? {} : { repeat: Infinity, duration: 2, ease: "easeInOut" }}
             className="w-[2px] h-12 rounded-full bg-gradient-to-b from-violet-500 to-transparent"
           />
         </motion.div>

@@ -13,14 +13,16 @@ const About = () => {
     <section id="about" className="py-24 relative overflow-hidden bg-slate-50 dark:bg-[#0B1120] transition-colors duration-500">
 
       {/* Background Ambient Effects */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <motion.div
-          style={{ y: yBg }}
-          className="absolute top-[10%] -left-32 w-[35rem] h-[35rem] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen"
-        />
-        <div className="absolute bottom-[10%] -right-32 w-[40rem] h-[40rem] bg-blue-600/20 rounded-full blur-[140px] mix-blend-screen" />
-        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
-      </div>
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 opacity-40">
+          <motion.div
+            style={{ y: yBg }}
+            className="absolute top-[10%] -left-32 w-[35rem] h-[35rem] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen"
+          />
+          <div className="absolute bottom-[10%] -right-32 w-[40rem] h-[40rem] bg-blue-600/20 rounded-full blur-[140px] mix-blend-screen" />
+          <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+        </div>
+      )}
 
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         <motion.div
@@ -88,26 +90,26 @@ const About = () => {
             </p>
 
             {/* Stat Cards Mini */}
-            <div className="grid grid-cols-2 gap-4 pt-6 max-w-[520px]">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-6 max-w-[520px]">
               <motion.div
                 whileHover={{ scale: 1.03, y: -4 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="glass p-5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-colors group relative overflow-hidden shadow-lg hover:shadow-violet-500/10"
+                className="glass p-4 sm:p-5 rounded-2xl border border-white/5 hover:border-violet-500/30 transition-colors group relative overflow-hidden shadow-lg hover:shadow-violet-500/10 flex flex-col justify-center"
               >
                 <div className="absolute inset-0 bg-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Code2 className="text-violet-400 mb-3 transition-transform duration-500 group-hover:scale-110" size={24} />
-                <div className="montserrat-bold text-3xl text-slate-900 dark:text-white mb-1 transition-colors duration-500">10+</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400 transition-colors duration-500">Projects Built</div>
+                <Code2 className="text-violet-400 mb-2 sm:mb-3 transition-transform duration-500 group-hover:scale-110" size={24} />
+                <div className="montserrat-bold text-2xl lg:text-3xl text-slate-900 dark:text-white mb-1 transition-colors duration-500">10+</div>
+                <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 transition-colors duration-500">Projects Built</div>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.03, y: -4 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="glass p-5 rounded-2xl border border-white/5 hover:border-fuchsia-500/30 transition-colors group relative overflow-hidden shadow-lg hover:shadow-fuchsia-500/10"
+                className="glass p-4 sm:p-5 rounded-2xl border border-white/5 hover:border-fuchsia-500/30 transition-colors group relative overflow-hidden shadow-lg hover:shadow-fuchsia-500/10 flex flex-col justify-center"
               >
                 <div className="absolute inset-0 bg-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <Trophy className="text-fuchsia-400 mb-3 transition-transform duration-500 group-hover:scale-110" size={24} />
-                <div className="montserrat-bold text-3xl text-slate-900 dark:text-white mb-1 transition-colors duration-500">Passionate</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400 transition-colors duration-500">Problem Solver</div>
+                <Trophy className="text-fuchsia-400 mb-2 sm:mb-3 transition-transform duration-500 group-hover:scale-110" size={24} />
+                <div className="montserrat-bold text-xl sm:text-2xl lg:text-3xl text-slate-900 dark:text-white mb-1 transition-colors duration-500 break-words line-clamp-1">Passionate</div>
+                <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 transition-colors duration-500 leading-tight">Problem Solver</div>
               </motion.div>
             </div>
           </motion.div>

@@ -16,7 +16,9 @@ const Footer = () => {
     <footer className="relative bg-slate-100 dark:bg-slate-950 pt-16 pb-8 overflow-hidden transition-colors duration-500">
 
       {/* Ambient Noise Background */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
+      {!isMobile && (
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
+      )}
 
       {/* Glowing Top Border */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />

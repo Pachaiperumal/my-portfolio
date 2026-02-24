@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ParticlesBackground = () => {
     const [particles, setParticles] = useState([]);
@@ -50,4 +50,4 @@ const ParticlesBackground = () => {
     );
 };
 
-export default ParticlesBackground;
+export default React.memo(ParticlesBackground);

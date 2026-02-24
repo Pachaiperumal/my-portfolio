@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Sun, Moon, Home, User, Code2, Briefcase } from 'lucide-react'
 
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -45,24 +45,29 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
   }, [])
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
+    { name: 'Home', href: '#home', icon: Home },
+    { name: 'About', href: '#about', icon: User },
+    { name: 'Skills', href: '#skills', icon: Code2 },
+    { name: 'Projects', href: '#projects', icon: Briefcase },
   ]
 
   const handleSmoothScroll = (e, href, name) => {
     e.preventDefault()
-    const targetId = href.replace('#', '')
-    const element = document.getElementById(targetId)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      })
-      setActiveTab(name)
-      setIsMobileMenuOpen(false)
-    }
+    // Immediately close the mobile menu for instant tap feedback
+    setIsMobileMenuOpen(false)
+    setActiveTab(name)
+
+    // Execute scroll slightly after to allow the menu closing animation to start
+    setTimeout(() => {
+      const targetId = href.replace('#', '')
+      const element = document.getElementById(targetId)
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop - 80,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
   }
 
   return (
@@ -132,6 +137,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             onClick={toggleTheme}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            aria-label="Toggle Theme"
             className={`p-2.5 rounded-full flex items-center justify-center transition-colors ${isScrolled
               ? 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10'
               : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/10 glass'
@@ -159,6 +165,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
           <motion.button
             onClick={toggleTheme}
             whileTap={{ scale: 0.9 }}
+            aria-label="Toggle Theme"
             className="w-10 h-10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
           >
             {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
@@ -166,6 +173,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
 
           <motion.button
             whileTap={{ scale: 0.9 }}
+            aria-label="Toggle Mobile Menu"
             className="w-10 h-10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -182,32 +190,60 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 shadow-2xl absolute top-full left-0 w-full"
+            className="md:hidden overflow-hidden bg-white/95 dark:bg-[#0B1120]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-full left-0 w-full rounded-b-[2rem]"
           >
-            <div className="flex flex-col px-6 py-6 gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href, link.name)}
-                  className="relative group text-lg font-medium"
-                >
-                  <span className={`transition-colors duration-300 merriweather-bold ${activeTab === link.name ? 'text-violet-500 dark:text-violet-400' : 'text-slate-600 dark:text-slate-300'
-                    }`}>
-                    {link.name}
-                  </span>
-                  <span className={`absolute -bottom-2 left-0 h-0.5 bg-violet-400 transition-all duration-300 ${activeTab === link.name ? 'w-12' : 'w-0'
-                    }`} />
-                </a>
-              ))}
-              <hr className="border-slate-200 dark:border-white/10 my-2" />
-              <a
+            <div className="flex flex-col px-6 py-8 gap-3">
+              {navLinks.map((link, i) => {
+                const Icon = link.icon;
+                const isActive = activeTab === link.name;
+                return (
+                  <motion.a
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1, ease: "easeOut" }}
+                    href={link.href}
+                    onClick={(e) => handleSmoothScroll(e, link.href, link.name)}
+                    className={`relative group flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 cursor-pointer pointer-events-auto ${isActive
+                      ? 'bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-300 shadow-sm border border-violet-100 dark:border-violet-500/20'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                      }`}
+                  >
+                    <div className={`p-2 rounded-xl transition-colors ${isActive ? 'bg-violet-100 dark:bg-violet-500/20' : 'bg-slate-100 dark:bg-slate-800 max-sm:dark:bg-slate-800/50 group-hover:bg-slate-200 dark:group-hover:bg-slate-700'}`}>
+                      <Icon size={20} />
+                    </div>
+                    <span className="text-lg font-bold merriweather-bold tracking-wide">
+                      {link.name}
+                    </span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-mobile-indicator"
+                        className="absolute left-0 w-1.5 h-8 bg-violet-500 rounded-r-full"
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </motion.a>
+                );
+              })}
+
+              <motion.hr
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="border-slate-200 dark:border-white/10 my-3 mx-2"
+              />
+
+              <motion.a
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, ease: "easeOut" }}
+                whileTap={{ scale: 0.95 }}
                 href="#contact"
                 onClick={(e) => handleSmoothScroll(e, '#contact', 'Contact')}
-                className="w-full py-4 bg-violet-500 text-white dark:text-slate-950 rounded-xl text-center font-bold montserrat-bold hover:bg-violet-400 transition-colors"
+                className="w-full block py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-2xl text-center font-bold montserrat-bold shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:scale-[1.02] transition-all cursor-pointer pointer-events-auto"
               >
-                Hire Me
-              </a>
+                Let's Talk
+              </motion.a>
             </div>
           </motion.div>
         )}

@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
 
 const CursorGlow = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     useEffect(() => {
+        if (isMobile) return;
+
         const updateMousePosition = (e) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
         };
@@ -14,14 +18,16 @@ const CursorGlow = () => {
         return () => {
             window.removeEventListener('mousemove', updateMousePosition);
         };
-    }, []);
+    }, [isMobile]);
+
+    if (isMobile) return null;
 
     return (
         <motion.div
             className="fixed top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none mix-blend-screen z-50 overflow-hidden"
             animate={{
-                x: mousePosition.x - 200, // center horizontal
-                y: mousePosition.y - 200, // center vertical
+                x: mousePosition.x - 160, // center horizontal
+                y: mousePosition.y - 160, // center vertical
                 opacity: 0.5,
             }}
             transition={{

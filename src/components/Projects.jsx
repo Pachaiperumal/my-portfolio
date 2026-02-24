@@ -70,17 +70,19 @@ const Projects = () => {
     <section id="projects" className="py-24 relative overflow-hidden bg-slate-50 dark:bg-[#0A0515] transition-colors duration-500">
 
       {/* Background Ambient Effects */}
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-        <motion.div
-          style={{ y: yBg1 }}
-          className="absolute top-[10%] -right-32 w-[40rem] h-[40rem] bg-indigo-600/20 rounded-full blur-[140px] mix-blend-screen"
-        />
-        <motion.div
-          style={{ y: yBg2 }}
-          className="absolute bottom-[10%] -left-32 w-[35rem] h-[35rem] bg-fuchsia-600/20 rounded-full blur-[120px] mix-blend-screen"
-        />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
-      </div>
+      {!isMobile && (
+        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+          <motion.div
+            style={{ y: yBg1 }}
+            className="absolute top-[10%] -right-32 w-[40rem] h-[40rem] bg-indigo-600/20 rounded-full blur-[140px] mix-blend-screen"
+          />
+          <motion.div
+            style={{ y: yBg2 }}
+            className="absolute bottom-[10%] -left-32 w-[35rem] h-[35rem] bg-fuchsia-600/20 rounded-full blur-[120px] mix-blend-screen"
+          />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
+        </div>
+      )}
 
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         {/* Header */}

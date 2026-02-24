@@ -1,9 +1,13 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const StarBackground = () => {
     const canvasRef = useRef(null);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     useEffect(() => {
+        if (isMobile) return;
+
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         let animationFrameId;
@@ -61,7 +65,9 @@ const StarBackground = () => {
             window.removeEventListener('resize', setCanvasSize);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [isMobile]);
+
+    if (isMobile) return null;
 
     return (
         <canvas
@@ -72,4 +78,4 @@ const StarBackground = () => {
     );
 };
 
-export default StarBackground;
+export default React.memo(StarBackground);
